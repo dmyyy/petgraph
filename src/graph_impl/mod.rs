@@ -7,6 +7,7 @@ use std::mem::size_of;
 use std::ops::{Index, IndexMut, Range};
 use std::slice;
 
+use bevy_reflect::Reflect;
 use fixedbitset::FixedBitSet;
 
 use crate::{Directed, Direction, EdgeType, Incoming, IntoWeightedEdge, Outgoing, Undirected};
@@ -100,7 +101,7 @@ unsafe impl IndexType for u8 {
 }
 
 /// Node identifier.
-#[derive(Copy, Clone, Default, PartialEq, PartialOrd, Eq, Ord, Hash)]
+#[derive(Copy, Clone, Default, PartialEq, PartialOrd, Eq, Ord, Hash, Reflect)]
 pub struct NodeIndex<Ix = DefaultIx>(Ix);
 
 impl<Ix: IndexType> NodeIndex<Ix> {
@@ -159,7 +160,7 @@ pub fn edge_index<Ix: IndexType>(index: usize) -> EdgeIndex<Ix> {
 }
 
 /// Edge identifier.
-#[derive(Copy, Clone, Default, PartialEq, PartialOrd, Eq, Ord, Hash)]
+#[derive(Copy, Clone, Default, PartialEq, PartialOrd, Eq, Ord, Hash, Reflect)]
 pub struct EdgeIndex<Ix = DefaultIx>(Ix);
 
 impl<Ix: IndexType> EdgeIndex<Ix> {
